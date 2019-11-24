@@ -1,13 +1,24 @@
 {
   "name": "@cicadoidea/basic",
   "title": "Basic",
-  "main": "src/basic.js",
-  "files": [ "src" ],
+  "main": "lib/basic.js",
+  "files": [
+    "src",
+    "lib"
+  ],
   "version": "0.0.1",
   "license": "GPL-3.0-or-later",
   "author": "Xie Yuheng",
   "repository": {
     "type": "git",
     "url": "https://github.com/cicadoidea/basic"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "devDependencies": {
+    "@types/assert": "^1.4.3",
+    "typescript": "^3.7.2"
   }
 }
