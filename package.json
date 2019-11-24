@@ -1,0 +1,13 @@
+{
+  "name": "@cicadoidea/basic",
+  "title": "Basic",
+  "main": "src/basic.js",
+  "files": [ "src" ],
+  "version": "0.0.1",
+  "license": "GPL-3.0-or-later",
+  "author": "Xie Yuheng",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cicadoidea/basic"
+  }
+}
