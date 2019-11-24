@@ -106,6 +106,22 @@ function obj2map <V> (
 }
 
 export
+function array2map <V> (array: Array <V>): Map <string, V> {
+  let map = new Map()
+  let len = array.length / 2
+  assert(len = Math.floor(len))
+  for (let i of range(0, len)) {
+    map.set(array[i], array[i+1])
+  }
+  return map
+}
+
+export
+function array2obj <V> (array: Array <V>): { [key: string]: V } {
+  return map2obj(array2map(array))
+}
+
+export
 type to_map_t <V> = Map <string, V> | { [key: string]: V }
 
 export
