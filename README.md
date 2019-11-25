@@ -1,6 +1,6 @@
 # Basic
 
-Basic library for js and nodejs.
+Basic library for js.
 
 - `npm install @cicadoidea/basic`
 
