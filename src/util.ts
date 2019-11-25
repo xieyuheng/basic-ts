@@ -62,6 +62,15 @@ function map_eq <K, V> (
 }
 
 export
+function obj_eq <K, V> (
+  x: { [key: string]: V },
+  y: { [key: string]: V },
+  eq: (v: V, w: V) => boolean,
+): boolean {
+  return map_eq(obj2map(x), obj2map(y), eq)
+}
+
+export
 function array_eq <V> (
   x: Array <V>,
   y: Array <V>,
@@ -156,4 +165,9 @@ export
 function rand_member <T> (array: Array <T>): T {
   let i = rand_nat (array.length)
   return array [i]
+}
+
+export
+function both (x: any, y: any, p: (x: any) => boolean): boolean {
+  return p(x) && p(y)
 }
