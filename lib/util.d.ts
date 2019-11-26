@@ -34,3 +34,4 @@ export declare function mapmap<K, A, B>(map: Map<K, A>, f: (a: A) => B): Map<K, 
 export declare function rand_nat(max: number): number;
 export declare function rand_member<T>(array: Array<T>): T;
 export declare function both(x: any, y: any, p: (x: any) => boolean): boolean;
+export declare function str_find_index(str: string, p: (x: string) => boolean): number;

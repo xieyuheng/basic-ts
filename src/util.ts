@@ -171,3 +171,19 @@ export
 function both (x: any, y: any, p: (x: any) => boolean): boolean {
   return p(x) && p(y)
 }
+
+export
+function str_find_index(str: string, p: (x: string) => boolean): number {
+  let index = 0
+
+  while (index < str.length) {
+    let x = str[index]
+    if (p(x)) {
+      return index
+    } else {
+      index += 1
+    }
+  }
+
+  return -1
+}
