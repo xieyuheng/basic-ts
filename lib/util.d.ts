@@ -24,9 +24,6 @@ export declare function array2map<V>(array: Array<V>): Map<string, V>;
 export declare function array2obj<V>(array: Array<V>): {
     [key: string]: V;
 };
-export declare type to_map_t<V> = Map<string, V> | {
-    [key: string]: V;
-};
 export declare function map_from<V>(x: Map<string, V> | {
     [key: string]: V;
 }): Map<string, V>;

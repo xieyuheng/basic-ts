@@ -1,5 +1,4 @@
-export
-abstract class option_t <T> {
+export abstract class option_t <T> {
   bind <X> (
     f: (x: T) => option_t <X>,
   ): option_t <X> {
@@ -74,8 +73,7 @@ abstract class option_t <T> {
   }
 }
 
-export
-class some_t <T> extends option_t <T> {
+export class some_t <T> extends option_t <T> {
   value: T
 
   constructor (value: T) {
@@ -84,8 +82,7 @@ class some_t <T> extends option_t <T> {
   }
 }
 
-export
-class none_t <T> extends option_t <T> {
+export class none_t <T> extends option_t <T> {
   constructor () {
     super ()
   }

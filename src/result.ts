@@ -1,5 +1,4 @@
-export
-abstract class result_t <T, E> {
+export abstract class result_t <T, E> {
   bind <X> (
     f: (x: T) => result_t <X, E>,
   ): result_t <X, E> {
@@ -93,8 +92,7 @@ abstract class result_t <T, E> {
   }
 }
 
-export
-class ok_t <T, E> extends result_t <T, E> {
+export class ok_t <T, E> extends result_t <T, E> {
   value: T
 
   constructor (value: T) {
@@ -103,8 +101,7 @@ class ok_t <T, E> extends result_t <T, E> {
   }
 }
 
-export
-class err_t <T, E> extends result_t <T, E> {
+export class err_t <T, E> extends result_t <T, E> {
   error: E
 
   constructor (error: E) {

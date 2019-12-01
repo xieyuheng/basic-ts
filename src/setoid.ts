@@ -1,5 +1,4 @@
-export
-class setoid_t <T> {
+export class setoid_t <T> {
   eq: (x: T, y: T) => boolean
   array: Array <T> = new Array()
 
