@@ -5,7 +5,7 @@ export declare function log<T>(x: T): void;
  */
 export declare function range(lo: number, hi: number): Generator<number, void, unknown>;
 export declare function ranges(array: Array<[number, number]>): Generator<number, void, unknown>;
-export declare function repeats<T>(x: T, n: number): Array<T>;
+export declare function repeats<T>(f: () => T, n: number): Array<T>;
 export declare function map_eq<K, V>(x: Map<K, V>, y: Map<K, V>, eq: (v: V, w: V) => boolean): boolean;
 export declare function obj_eq<K, V>(x: {
     [key: string]: V;
