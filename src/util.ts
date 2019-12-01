@@ -28,10 +28,9 @@ export function* ranges(array: Array<[number, number]>) {
 }
 
 export function repeats<T>(f: () => T, n: number): Array<T> {
-  let x = f()
   let array = new Array()
   for (let _ of range(0, n)) {
-    array.push(x)
+    array.push(f())
   }
   return array
 }

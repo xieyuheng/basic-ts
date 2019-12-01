@@ -4,7 +4,7 @@
   "files": [
     "lib"
   ],
-  "version": "0.0.9",
+  "version": "0.0.10",
   "license": "GPL-3.0-or-later",
   "author": "Xie Yuheng",
   "repository": {
@@ -21,6 +21,7 @@
     "typescript": "^3.7.2"
   },
   "dependencies": {
+    "assert": "^2.0.0",
     "ava": "^2.4.0"
   }
 }
