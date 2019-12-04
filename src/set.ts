@@ -1,6 +1,7 @@
-export class setoid_t <T> {
+export class set_t <T> {
+  private array: Array <T> = new Array()
+
   eq: (x: T, y: T) => boolean
-  array: Array <T> = new Array()
 
   constructor(eq: (x: T, y: T) => boolean) {
     this.eq = eq
@@ -36,5 +37,15 @@ export class setoid_t <T> {
     for (let x of this.array) {
       yield x
     }
+  }
+
+  *entries () {
+    for (let [k, v] of this.array.entries()) {
+      yield [k, v] as [number, T]
+    }
+  }
+
+  to_array(): Array <T> {
+    return this.array
   }
 }
