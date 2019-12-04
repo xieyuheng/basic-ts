@@ -66,6 +66,15 @@ export class map_t<K, V> {
     }
   }
 
+  get_unwrap(x: K): V {
+    let v = this.get(x)
+    if (v) {
+      return v
+    } else {
+      throw new Error('map.get_unwrap')
+    }
+  }
+
   set(x: K, v: V): this {
     let i = this.array.findIndex(([y, _]) => this.key_eq(x, y))
     if (i === -1) {
@@ -79,6 +88,19 @@ export class map_t<K, V> {
   set_array(array: Array<[K, V]>): this {
     for (let [k, v] of array) {
       this.set(k, v)
+    }
+    return this
+  }
+
+  set_iter(iter: Iterator<[K, V]>): this {
+    while (true) {
+      let result = iter.next()
+      if (result.done) {
+        break
+      } else {
+        let [k, v] = result.value
+        this.set(k, v)
+      }
     }
     return this
   }
@@ -105,5 +127,21 @@ export class map_t<K, V> {
     for (let [k, v] of this.array) {
       yield v as V
     }
+  }
+
+  endo_map_on_value(f: (v: V) => V): map_t<K, V> {
+    let map: map_t<K, V> = new map_t(this)
+    return map
+  }
+
+  compose<W>(that: map_t<V, W>): map_t<K, W> {
+    let map: map_t<K, W> = new map_t({
+      key_eq: this.key_eq,
+      value_eq: that.value_eq,
+    })
+    for (let [key, value] of this) {
+      map.set(key, that.get_unwrap(value))
+    }
+    return map
   }
 }
