@@ -1,13 +1,35 @@
-export class set_t <T> {
-  private array: Array <T> = new Array()
+export class set_t <V> {
+  private array: Array <V> = new Array()
 
-  eq: (x: T, y: T) => boolean
+  eq: (x: V, y: V) => boolean
 
-  constructor(eq: (x: T, y: T) => boolean) {
+  constructor(eq: (x: V, y: V) => boolean) {
     this.eq = eq
   }
 
-  add(x: T): this {
+  weak_eq(that: set_t<V>): boolean {
+    if (this.size !== that.size) {
+      return false
+    } else {
+      for (let x of this) {
+        if (! that.has(x)) {
+          return false
+        }
+      }
+      for (let x of that) {
+        if (! that.has(x)) {
+          return false
+        }
+      }
+      return true
+    }
+  }
+
+  to_array(): Array <V> {
+    return Array.from(this.array)
+  }
+
+  add(x: V): this {
     let i = this.array.findIndex(y => this.eq(x, y))
     if (i === -1) {
       this.array.push(x)
@@ -15,12 +37,12 @@ export class set_t <T> {
     return this
   }
 
-  has(x: T): boolean {
+  has(x: V): boolean {
     let i = this.array.findIndex(y => this.eq(x, y))
     return i !== -1
   }
 
-  delete(x: T): boolean {
+  delete(x: V): boolean {
     let result = this.has(x)
     let i = this.array.findIndex(y => this.eq(x, y))
     if (i !== -1) {
@@ -35,17 +57,13 @@ export class set_t <T> {
 
   *[Symbol.iterator] () {
     for (let x of this.array) {
-      yield x
+      yield x as V
     }
   }
 
   *entries () {
     for (let [k, v] of this.array.entries()) {
-      yield [k, v] as [number, T]
+      yield [k, v] as [number, V]
     }
-  }
-
-  to_array(): Array <T> {
-    return Array.from(this.array)
   }
 }

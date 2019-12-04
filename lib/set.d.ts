@@ -1,12 +1,13 @@
-export declare class set_t<T> {
+export declare class set_t<V> {
     private array;
-    eq: (x: T, y: T) => boolean;
-    constructor(eq: (x: T, y: T) => boolean);
-    add(x: T): this;
-    has(x: T): boolean;
-    delete(x: T): boolean;
+    eq: (x: V, y: V) => boolean;
+    constructor(eq: (x: V, y: V) => boolean);
+    weak_eq(that: set_t<V>): boolean;
+    to_array(): Array<V>;
+    add(x: V): this;
+    has(x: V): boolean;
+    delete(x: V): boolean;
     get size(): number;
-    [Symbol.iterator](): Generator<T, void, unknown>;
-    entries(): Generator<[number, T], void, unknown>;
-    to_array(): Array<T>;
+    [Symbol.iterator](): Generator<V, void, unknown>;
+    entries(): Generator<[number, V], void, unknown>;
 }

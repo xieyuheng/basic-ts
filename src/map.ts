@@ -1,17 +1,54 @@
+import { set_t } from './set'
+
 export class map_t<K, V> {
   private array: Array<[K, V]>
 
   key_eq: (x: K, y: K) => boolean
+  value_eq: (x: V, y: V) => boolean
 
   constructor(the: {
     key_eq: (x: K, y: K) => boolean,
+    value_eq: (x: V, y: V) => boolean,
   }) {
     this.array = new Array()
     this.key_eq = the.key_eq
+    this.value_eq = the.value_eq
   }
 
   to_array(): Array<[K, V]> {
     return Array.from(this.array)
+  }
+
+  weak_eq(that: map_t<K, V>): boolean {
+    if (this.size !== that.size) {
+      return false
+    } else {
+      for (let [x, y] of this) {
+        let z = that.get(x)
+        if (z === undefined) {
+          return false
+        } else if (! this.value_eq(y, z)) {
+          return false
+        } else if (! that.value_eq(y, z)) {
+          return false
+        }
+      }
+      for (let [x, y] of that) {
+        let z = this.get(x)
+        if (z === undefined) {
+          return false
+        } else if (! this.value_eq(y, z)) {
+          return false
+        } else if (! that.value_eq(y, z)) {
+          return false
+        }
+      }
+      return true
+    }
+  }
+
+  get size(): number {
+    return this.array.length
   }
 
   has(x: K): boolean {
@@ -46,27 +83,27 @@ export class map_t<K, V> {
     return this
   }
 
-  *[Symbol.iterator] () {
+  *[Symbol.iterator]() {
     for (let [k, v] of this.array) {
-      yield [k, v]
+      yield [k, v] as [K, V]
     }
   }
 
-  *entries () {
+  *entries() {
     for (let [k, v] of this.array) {
-      yield [k, v]
+      yield [k, v] as [K, V]
     }
   }
 
-  *keys () {
+  *keys() {
     for (let [k, v] of this.array) {
-      yield k
+      yield k as K
     }
   }
 
-  *values () {
+  *values() {
     for (let [k, v] of this.array) {
-      yield v
+      yield v as V
     }
   }
 }
