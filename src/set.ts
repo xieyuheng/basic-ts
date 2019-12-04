@@ -46,6 +46,6 @@ export class set_t <T> {
   }
 
   to_array(): Array <T> {
-    return this.array
+    return Array.from(this.array)
   }
 }
