@@ -1,10 +1,14 @@
+import { eq_t } from '../interface/eq'
+
 export class set_t <V> {
   private array: Array <V> = new Array()
 
-  eq: (x: V, y: V) => boolean
+  eq: eq_t<V>
 
-  constructor(eq: (x: V, y: V) => boolean) {
-    this.eq = eq
+  constructor(the: {
+    eq: eq_t<V>
+  }) {
+    this.eq = the.eq
   }
 
   weak_eq(that: set_t<V>): boolean {
@@ -30,7 +34,7 @@ export class set_t <V> {
   }
 
   add(x: V): this {
-    let i = this.array.findIndex(y => this.eq(x, y))
+    let i = this.array.findIndex(y => this.eq.eq(x, y))
     if (i === -1) {
       this.array.push(x)
     }
@@ -38,13 +42,13 @@ export class set_t <V> {
   }
 
   has(x: V): boolean {
-    let i = this.array.findIndex(y => this.eq(x, y))
+    let i = this.array.findIndex(y => this.eq.eq(x, y))
     return i !== -1
   }
 
   delete(x: V): boolean {
     let result = this.has(x)
-    let i = this.array.findIndex(y => this.eq(x, y))
+    let i = this.array.findIndex(y => this.eq.eq(x, y))
     if (i !== -1) {
       this.array = this.array.slice(0, i).concat(this.array.slice(i + 1))
     }
