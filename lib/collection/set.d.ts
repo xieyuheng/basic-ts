@@ -1,9 +1,8 @@
-import { eq_t } from '../interface/eq';
 export declare class set_t<V> {
     private array;
-    eq: eq_t<V>;
+    eq: (x: V, y: V) => boolean;
     constructor(the: {
-        eq: eq_t<V>;
+        eq: (x: V, y: V) => boolean;
     });
     weak_eq(that: set_t<V>): boolean;
     to_array(): Array<V>;

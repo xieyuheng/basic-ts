@@ -1,11 +1,10 @@
-import { eq_t } from '../interface/eq';
 export declare class map_t<K, V> {
     private array;
-    key_eq: eq_t<K>;
-    value_eq: eq_t<V>;
+    key_eq: (x: K, y: K) => boolean;
+    value_eq: (x: V, y: V) => boolean;
     constructor(the: {
-        key_eq: eq_t<K>;
-        value_eq: eq_t<V>;
+        key_eq: (x: K, y: K) => boolean;
+        value_eq: (x: V, y: V) => boolean;
     });
     to_array(): Array<[K, V]>;
     weak_eq(that: map_t<K, V>): boolean;

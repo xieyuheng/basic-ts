@@ -1,14 +1,12 @@
-import { eq_t } from '../interface/eq'
-
 export class map_t<K, V> {
   private array: Array<[K, V]>
 
-  key_eq: eq_t<K>
-  value_eq: eq_t<V>
+  key_eq: (x: K, y: K) => boolean
+  value_eq: (x: V, y: V) => boolean
 
   constructor(the: {
-    key_eq: eq_t<K>,
-    value_eq: eq_t<V>,
+    key_eq: (x: K, y: K) => boolean,
+    value_eq: (x: V, y: V) => boolean,
   }) {
     this.array = new Array()
     this.key_eq = the.key_eq
@@ -27,9 +25,9 @@ export class map_t<K, V> {
         let z = that.get(x)
         if (z === undefined) {
           return false
-        } else if (this.value_eq.not_eq(y, z)) {
+        } else if (! this.value_eq(y, z)) {
           return false
-        } else if (that.value_eq.not_eq(y, z)) {
+        } else if (! that.value_eq(y, z)) {
           return false
         }
       }
@@ -37,9 +35,9 @@ export class map_t<K, V> {
         let z = this.get(x)
         if (z === undefined) {
           return false
-        } else if (this.value_eq.not_eq(y, z)) {
+        } else if (! this.value_eq(y, z)) {
           return false
-        } else if (that.value_eq.not_eq(y, z)) {
+        } else if (! that.value_eq(y, z)) {
           return false
         }
       }
@@ -52,12 +50,12 @@ export class map_t<K, V> {
   }
 
   has(x: K): boolean {
-    let i = this.array.findIndex(([y, _]) => this.key_eq.eq(x, y))
+    let i = this.array.findIndex(([y, _]) => this.key_eq(x, y))
     return i !== -1
   }
 
   get(x: K): V | undefined {
-    let i = this.array.findIndex(([y, _]) => this.key_eq.eq(x, y))
+    let i = this.array.findIndex(([y, _]) => this.key_eq(x, y))
     if (i === -1) {
       return undefined
     } else {
@@ -76,7 +74,7 @@ export class map_t<K, V> {
   }
 
   set(x: K, v: V): this {
-    let i = this.array.findIndex(([y, _]) => this.key_eq.eq(x, y))
+    let i = this.array.findIndex(([y, _]) => this.key_eq(x, y))
     if (i === -1) {
       this.array.push([x, v])
     } else {
