@@ -60,7 +60,16 @@ export function obj_eq<K, V>(
   y: { [key: string]: V },
   eq: (v: V, w: V) => boolean,
 ): boolean {
-  return map_eq(obj2map(x), obj2map(y), eq)
+  let keys = Object.keys(x)
+  if (Object.keys(y).length !== keys.length) {
+    return false
+  }
+  for (let k of keys) {
+    if (!eq(x[k], y[k])) {
+      return false
+    }
+  }
+  return true
 }
 
 export function array_eq<V>(
